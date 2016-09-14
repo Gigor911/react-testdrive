@@ -1,5 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import EventEmitter from "events";
 
 window.ee = new EventEmitter();
 
@@ -46,10 +47,10 @@ var Article = React.createClass({
             visible = this.state.visible;
 
         return (
-            <div className="article">
-                <p className="news__author">{author}</p>
-                <p className="news__text">{text}</p>
-                <a href="#" onClick={this.readMoreClick} className={'news__readmore ' + (visible ? 'none' : '') }>Подробнее</a>
+            <div className='article'>
+                <p className='news__author'>{author}</p>
+                <p className='news__text'>{text}</p>
+                <a href='#' onClick={this.readMoreClick} className={'news__readmore ' + (visible ? 'none' : '') }>Подробнее</a>
                 <p className={'news__big-text ' + (visible ? '' : 'none')}>{bigText}</p>
             </div>
         )
@@ -74,7 +75,7 @@ var News = React.createClass({
         }
 
         return (
-            <div className="news">
+            <div className='news'>
                 {newsTemplate}
                 <strong className={'news__count ' + (data.length > 0 ? '' : 'none') }>Всего
                     новостей: {data.length}</strong>
@@ -132,16 +133,16 @@ var Add = React.createClass({
             authorEmpty = this.state.authorEmpty;
 
         return (
-            <form className="add cf">
-                <input onChange={this.onFieldChange.bind(this, 'authorEmpty')} type="text" className="add__author"
-                       ref="author" defaultValue=''/>
-                <textarea onChange={this.onFieldChange.bind(this, 'textEmpty')} placeholder="Enter news"
-                          className='add__text' ref="text" defaultValue=''/>
+            <form className='add cf'>
+                <input onChange={this.onFieldChange.bind(this, 'authorEmpty')} type='text' className='add__author'
+                       ref='author' defaultValue=''/>
+                <textarea onChange={this.onFieldChange.bind(this, 'textEmpty')} placeholder='Enter news'
+                          className='add__text' ref='text' defaultValue=''/>
                 <label className='add__checkrule'>
                     <input onClick={this.onCheckRuleClick} type='checkbox' defaultChecked={false} ref='checkrule'/>Я
                     согласен с правилами
                 </label>
-                <button onClick={this.addButtonClick} className="add__btn" ref="alert_button"
+                <button onClick={this.addButtonClick} className='add__btn' ref='alert_button'
                         disabled={checkboxEmpty || authorEmpty || textEmpty}>Добавить новость
                 </button>
             </form>
@@ -170,7 +171,7 @@ var App = React.createClass({
 
     render: function () {
         return (
-            <div className="app">
+            <div className='app'>
                 <Add />
                 <h3>Новости</h3>
                 <News data={this.state.news}/>

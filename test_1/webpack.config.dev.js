@@ -5,8 +5,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
-        './src/index.js',
-        './styles/style.scss',
+        './app.js',
+        './app.scss',
         'webpack-hot-middleware/client'
     ],
     output: {
