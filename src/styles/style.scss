@@ -1,0 +1,15 @@
+img {
+  max-width: 100%;
+
+}
+
+.grid-element {
+  img:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+}
+
+.modal-dialog {
+  z-index: 1050;
+}

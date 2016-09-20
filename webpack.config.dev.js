@@ -1,50 +1,46 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var config = {
+module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: [
-        './src/index.js',
-        './styles/style.scss',
-        'webpack-hot-middleware/client'
+        'webpack-hot-middleware/client?reload=true&timeout=20000&noInfo=false&quiet=false',
+        path.join(__dirname,'src/index.js')
     ],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/dist/'
+        publicPath: '/'
     },
     module: {
-        preLoaders: [
-            {
-                test: /\.js$/,
-                loaders: ['eslint'],
-                exclude: /node_modules/
-            }
-        ],
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['babel'],
+                loader: 'babel',
                 exclude: /node_modules/
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!resolve-url!sass-loader?sourceMap')
+                loaders: ['style-loader', 'css-loader', 'sass-loader?sourceMap']
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+                test: /\.json$/,
+                loader: 'json-loader',
+                exclude: /node_modules/
             },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                loader: 'file?name=img/[name].[ext]'
+            }
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('styles.css', {
-            allChunks: true
-        })
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            inject: 'body'
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ]
-
 };
-
-module.exports = config;

@@ -1,17 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import {render} from 'react-dom'
+import App from './components/App'
+import styles from './styles/style.scss'
 
-var App = React.createClass({
-    render: function () {
-        return (
-            <div>
-                'Hello world'
-            </div>
-        )
-    }
-});
-
-ReactDOM.render(
+render(
     <App />,
     document.getElementById('root')
 );
