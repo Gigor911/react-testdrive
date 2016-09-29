@@ -1,64 +1,62 @@
 import React from 'react';
 import Images from '../../sampleData/photos.json';
-import Image from '../components/Image';
-import Lightbox from '../components/Lightbox';
+import Gallery from '../components/Gallery/Gallery';
+import Chat from '../components/Chat/Chat';
+import Cropper from '../components/Cropper/Cropper';
 
 export default class App extends React.Component {
     state = {
-        view: 'grid',
-        selected: null
+        app: null
     };
-
-    gridBtnClick() {
-        this.setState({view: 'grid'})
-    };
-
-    listBtnClick() {
-        this.setState({view: 'list'})
-    };
-
-    onSelectHandler(selected) {
-        this.setState({selected: selected});
-    };
-
-    toggleHandler() {
-       this.setState({selected: null});
+    onChangeApp(app) {
+        this.setState({
+            app: app
+        });
     }
-
-    imageChangeHandler(selected) {
-        this.setState({selected: selected})
-    }
-
     render() {
-        let imageArray = Images.photos;
-        let selected = this.state.selected;
-        return (
-            <div className='container'>
-                <h1 className='text-xs-center'>Images:</h1>
-                <div className='row'>
-                    <div className='col-md-12 text-xs-center'>
-                        <div className='btn-group' role='group'>
-                            <button type='button' className='btn btn-secondary' onClick={::this.gridBtnClick}><i className="fa fa-th"></i></button>
-                            <button type='button' className='btn btn-secondary' onClick={::this.listBtnClick}><i className="fa fa-list"></i></button>
+        let app = this.state.app;
+
+        switch (app) {
+            case 'gallery' :
+                return  (
+                    <div>
+                        <button onClick={::this.onChangeApp.bind(this, null)}  type="button" className="btn btn-secondary">Close</button>
+                        <Gallery data={Images}/>
+                    </div>
+                );
+                break;
+            case 'chat' :
+                return  (
+                    <div>
+                        <button onClick={::this.onChangeApp.bind(this, null)}  type="button" className="btn btn-secondary">Close</button>
+                        <Chat />
+                    </div>
+                );
+                break;
+            case 'cropper' :
+                return  (
+                    <div>
+                        <button onClick={::this.onChangeApp.bind(this, null)}  type="button" className="btn btn-secondary">Close</button>
+                        <Cropper />
+                    </div>
+
+                );
+                break;
+            default :
+                return (
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 text-xs-center">
+                                <div className="btn-group" role="group">
+                                    <button onClick={this.onChangeApp.bind(this, 'gallery')}  type="button" className="btn btn-secondary">Gallery</button>
+                                    <button onClick={::this.onChangeApp.bind(this, 'cropper')}  type="button" className="btn btn-secondary">Cropper</button>
+                                    <button onClick={::this.onChangeApp.bind(this, 'chat')}  type="button" className="btn btn-secondary">Chat</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='row'>
-                    <Image
-                        onSelect={::this.onSelectHandler}
-                        data={Images}
-                        view={this.state.view}
-                    />
-                </div>
-                <Lightbox
-                    data={Images}
-                    selected={selected}
-                    next={selected !== null ? (imageArray[selected.id + 1] ? imageArray[selected.id + 1] : imageArray[selected.id - imageArray.length + 1]) : null}
-                    prev={selected !== null ? (imageArray[selected.id - 1] ? imageArray[selected.id - 1] : imageArray[selected.id + imageArray.length - 1]) : null}
-                    onToggle={::this.toggleHandler}
-                    onImageChange={::this.imageChangeHandler}
-                />
-            </div>
-        )
+                )
+        }
+
     }
 }
