@@ -1,20 +1,22 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import Messages from './Messages'
 import Input from './Input'
 
+
 export default class Chat extends React.Component {
     state = {
-        messages: []
+        messages: this.props.data.messagesArray
     };
-    componentWillMount() {
-        if (!localStorage.getItem('messages')){
-            localStorage.setItem('messages', ['1', '2']);
-            this.setState({messages: localStorage.getItem('messages')})
+    updateMessagesHandler(message) {
+        let newMessageArray = this.state.messages.concat([message]);
+        if (newMessageArray.length > 51) {
+            newMessageArray.shift();
         }
-        else {
-            this.setState({messages: localStorage.getItem('messages')})
-        }
-    };
+        this.setState({messages: newMessageArray});
+        alert(message.id);
+
+    }
     render () {
         let messages = this.state.messages;
         return (
@@ -22,7 +24,7 @@ export default class Chat extends React.Component {
                 <div className="row">
                     <div className="col-md-8 offset-md-2">
                         <Messages data={messages}/>
-                        <Input />
+                        <Input updateMessages={::this.updateMessagesHandler}/>
                     </div>
                 </div>
             </div>

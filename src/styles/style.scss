@@ -13,3 +13,28 @@ img {
 .modal-dialog {
   z-index: 1050;
 }
+
+.messages-wrapper {
+  max-height: 70vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+//Animation
+.message-enter {
+  transform: translate(100%);
+}
+
+.message-enter.message-enter-active {
+  transform: translate(0%);
+  transition: all 500ms ease;
+}
+
+.message-leave {
+  opacity: 1;
+}
+
+.message-leave.message-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

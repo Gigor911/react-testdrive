@@ -1,5 +1,6 @@
 import React from 'react';
 import Images from '../../sampleData/photos.json';
+import Messages from '../../sampleData/messages.json'
 import Gallery from '../components/Gallery/Gallery';
 import Chat from '../components/Chat/Chat';
 import Cropper from '../components/Cropper/Cropper';
@@ -29,7 +30,7 @@ export default class App extends React.Component {
                 return  (
                     <div>
                         <button onClick={::this.onChangeApp.bind(this, null)}  type="button" className="btn btn-secondary">Close</button>
-                        <Chat />
+                        <Chat data={Messages}/>
                     </div>
                 );
                 break;
