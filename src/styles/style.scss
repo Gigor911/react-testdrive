@@ -1,40 +1,80 @@
 img {
-  max-width: 100%;
+    max-width: 100%;
 
 }
 
 .grid-element {
-  img:hover {
-    cursor: pointer;
-    opacity: 0.9;
-  }
+    img:hover {
+        cursor: pointer;
+        opacity: 0.9;
+    }
 }
 
 .modal-dialog {
-  z-index: 1050;
+    z-index: 1050;
 }
 
 .messages-wrapper {
-  max-height: 70vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+    height: calc(100vh - 94px - 38px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0 17px;
 }
 
 //Animation
 .message-enter {
-  transform: translate(100%);
+    transform: translate(100%);
 }
 
 .message-enter.message-enter-active {
-  transform: translate(0%);
-  transition: all 500ms ease;
+    transform: translate(0%);
+    transition: all 500ms ease;
 }
 
 .message-leave {
-  opacity: 1;
+    opacity: 1;
 }
 
 .message-leave.message-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
+
+.message-bubble {
+    position: relative;
+    padding: 10px 20px;
+    color: white;
+    background: #0275d8;
+    border-radius: 25px;
+    float: right;
+    margin: 5px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        bottom: -2px;
+        right: -7px;
+        height: 20px;
+        border-right: 20px solid #0275d8;
+        border-bottom-left-radius: 16px 14px;
+        -webkit-transform: translate(0, -2px);
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        bottom: -2px;
+        right: -56px;
+        width: 26px;
+        height: 20px;
+        background: white;
+        border-bottom-left-radius: 10px;
+        -webkit-transform: translate(-30px, -2px);
+    }
+}
+
+.clearfix {
+    clear: both;
 }

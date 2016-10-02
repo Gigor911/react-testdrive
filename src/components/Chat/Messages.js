@@ -3,17 +3,23 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 
 export default class Messages extends React.Component {
+
     render () {
         let messageTemplate = this.props.data.map(
             message =>
-                <div className="alert alert-success" key={message.id}>
+            <div key={message.id}>
+                <div className="message-bubble" >
                     <span>{message.text}</span>
                 </div>
+                <div className="clearfix"></div>
+            </div>
         );
         return (
 
-            <div className="messages-wrapper">
+            <div id="messages-wrapper" className="messages-wrapper">
                 <ReactCSSTransitionGroup
+                    component="div"
+                    id="messages-scroll"
                     transitionName="message"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={300}>
